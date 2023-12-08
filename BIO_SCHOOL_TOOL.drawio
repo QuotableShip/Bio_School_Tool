@@ -1,9 +1,42 @@
-<mxfile host="app.diagrams.net" modified="2023-12-08T07:45:59.114Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0" version="22.1.7" etag="8x7sl-b8sCiAfQU5PwVY" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-08T08:35:07.538Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0" etag="kQV_kG7e1KuqHgXNOWNz" version="22.1.7" type="github">
   <diagram name="Page-1" id="GszEk0k1s8LcneHVNTO7">
-    <mxGraphModel>
+    <mxGraphModel dx="543" dy="1503" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-3" value="Log_in" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="104" y="-474" width="378" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-24" value="&lt;div&gt;&amp;lt;&amp;lt;constructor&amp;gt;&amp;gt; extends JFrame(): Window Frame &lt;br&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;fontSize=16;align=left;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-3">
+          <mxGeometry y="30" width="378" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-4" value="+JPasswordField(): PasswordField" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-3">
+          <mxGeometry y="64" width="378" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-5" value="+JButton(&quot;Exit&quot;): Button" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-3">
+          <mxGeometry y="94" width="378" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-6" value="+JButton(&quot;Log in&quot;): Button" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-3">
+          <mxGeometry y="124" width="378" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-17" value="Home" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="102" y="-200" width="382" height="193" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-18" value="&amp;lt;&amp;lt;constructor&amp;gt;&amp;gt; extends JFrame(): Window Frame" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-17">
+          <mxGeometry y="26" width="382" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-19" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontSize=16;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-17">
+          <mxGeometry y="52" width="382" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-20" value="&lt;div&gt;+ home(public):&lt;/div&gt;&lt;div&gt;+JButton(&quot;Attendance&quot;);&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="yqpIpPLlXnaCs9euwSxt-17">
+          <mxGeometry y="60" width="382" height="133" as="geometry" />
+        </mxCell>
+        <mxCell id="yqpIpPLlXnaCs9euwSxt-26" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;fontSize=12;curved=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="yqpIpPLlXnaCs9euwSxt-17" target="yqpIpPLlXnaCs9euwSxt-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="27" y="-253" as="sourcePoint" />
+            <mxPoint x="187" y="-253" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
