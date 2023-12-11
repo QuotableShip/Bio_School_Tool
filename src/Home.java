@@ -90,7 +90,7 @@ public class Home extends JFrame{
         LogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Main_GUI();
+                new Log_in();
                 setVisible(false);
                 dispose();
             }

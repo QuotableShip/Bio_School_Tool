@@ -3,8 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main_GUI extends JFrame {
-    public Main_GUI(){
+public class Log_in extends JFrame {
+    public Log_in(){
         setTitle("Class Master");
         add(new JLabel("Enter Password", SwingConstants.CENTER), BorderLayout.CENTER);
         setSize(400,300);
@@ -60,7 +60,7 @@ public class Main_GUI extends JFrame {
                  UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        new Main_GUI();
+        new Log_in();
     }
 }
 
