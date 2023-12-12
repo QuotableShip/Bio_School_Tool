@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.Vector;
 
 public class ClassManagement extends JFrame {
-    public List<Class> classes = new ArrayList<>();
+    public Vector<TheClass> classes = new Vector<>();
+    FileAccess files = new FileAccess();
     public ClassManagement() {
 
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -48,16 +49,21 @@ public class ClassManagement extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String ClassName = JOptionPane.showInputDialog("Enter the Class");
-                classes.add(new Class(ClassName));
+                classes.add(new TheClass(ClassName));
                 for(int i = 0; i < classes.size(); i ++){
                     System.out.println(classes.get(i).ClassName);
+                }
+                try {
+                    files.StoreClasses(classes);
+                } catch (Exception ex) {
+                    ;
                 }
             }
         });
         addStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("a");
+                //System.out.println("a");
             }
         });
     }

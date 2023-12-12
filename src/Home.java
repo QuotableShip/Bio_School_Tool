@@ -57,6 +57,7 @@ public class Home extends JFrame{
                 new Attendance();
                 setVisible(false);
                 dispose();
+
             }
         });
 
@@ -95,6 +96,7 @@ public class Home extends JFrame{
                 dispose();
             }
         });
+
 
     }
     public static void main(String[] args) {

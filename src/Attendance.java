@@ -1,9 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class Attendance extends JFrame {
+    public Vector<TheClass> classes = new Vector<TheClass>();
+
+    public JComboBox<String> classesDropDown;
     public Attendance(){
 
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -33,12 +37,26 @@ public class Attendance extends JFrame {
         });
 
 
-        String arr[] = {"adfs","sfsdf","ffsdf","gfsd","sdfdfh"};
 
-        JComboBox dates = new JComboBox(arr);
-        dates.setBounds((int)((width * 0.5) - (width * 0.25)), (int) (height * 0.05), (int)(width * 0.5), (int)(height * 0.05));
-        this.add(dates);
-        dates.setVisible(true);
+        classesDropDown = new JComboBox<>();
+        classesDropDown.setBounds((int)((width * 0.5) - (width * 0.25)), (int) (height * 0.05), (int)(width * 0.5), (int)(height * 0.05));
+        this.add(classesDropDown);
+        classesDropDown.setForeground(Color.BLUE);
+        classesDropDown.setFont(new Font("Arial", Font.BOLD, 14));
+        classesDropDown.setVisible(true);
+
+        classesDropDown.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                classesDropDown.removeAllItems();
+                //Vector<String> classesArr = new Vector<>();
+                for (int i=0; i<classes.size(); i++) {
+                    classesDropDown.addItem(classes.get(i).ClassName);
+                }
+                //classesDropDown.setModel(new DefaultComboBoxModel(arr));
+                //classesDropDown.setModel(new DefaultComboBoxModel(ClassManagement.classes));
+                }
+        });
     }
    public static void main(String[] args) {
         new Attendance();
