@@ -22,7 +22,6 @@ public class Home extends JFrame{
 
         JPanel HS = new JPanel();
         HS.setBounds(0,0,(int)widthd,(int)heightd);
-        this.add(HS);
 
         JButton attendance = new JButton("Attendance");
         JButton LogOut = new JButton("Log Out");
@@ -36,20 +35,24 @@ public class Home extends JFrame{
         CA.setBounds((int)(0.65 * widthd), (int)(0.1 * heightd), (int)( 0.2* widthd), (int)(0.2 * heightd));
         CM.setBounds((int)(0.2 * widthd), (int)(0.35 * heightd), (int)(0.6 * width),(int) (0.1 * heightd));
 
+
+        HS.add(attendance);
+        HS.add(LogOut);
+        HS.add(Grades);
+        HS.add(CA);
+        HS.add(CM);
+
+        HS.setLayout(null);
+
+        this.add(HS);
+
         attendance.setVisible(true);
         LogOut.setVisible(true);
         Grades.setVisible(true);
         CA.setVisible(true);
         CM.setVisible(true);
 
-
-        this.add(attendance);
-        this.add(LogOut);
-        this.add(Grades);
-        this.add(CA);
-        this.add(CM);
-
-        this.setLayout(null);
+        this.setVisible(true);
 
         attendance.addActionListener(new ActionListener() {
             @Override

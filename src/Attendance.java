@@ -49,11 +49,10 @@ public class Attendance extends JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 classesDropDown.removeAllItems();
-                //Vector<String> classesArr = new Vector<>();
                 for (int i=0; i<classes.size(); i++) {
                     classesDropDown.addItem(classes.get(i).ClassName);
                 }
-                //classesDropDown.setModel(new DefaultComboBoxModel(arr));
+                classesDropDown.setModel(new DefaultComboBoxModel(classes));
                 //classesDropDown.setModel(new DefaultComboBoxModel(ClassManagement.classes));
                 }
         });
