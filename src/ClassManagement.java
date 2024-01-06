@@ -2,14 +2,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Field;
+import java.io.*;
 import java.util.Vector;
 
 public class ClassManagement extends JFrame {
-    public Vector<TheClass> classes = new Vector<>();
-    FileAccess files = new FileAccess();
     public ClassManagement() {
 
+        //list of Classes
+        Vector<String> addedClasses = new Vector<>();
+
+        //Stores addedClasses to File
+        try (ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream("addedClasses.dat"))){
+            fileWriter.writeObject(addedClasses);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //reads from addedClasses File
+        Vector<String> storedClasses = new Vector<>();
+        try (ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream("addedClasses.dat"))){
+            storedClasses = (Vector<String>) fileReader.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //24 - 44 sets layout and adds buttons to GUI
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
         int width = (int) (screen.getWidth() * 0.9);
@@ -22,20 +39,20 @@ public class ClassManagement extends JFrame {
         setVisible(true);
         this.setLayout(null);
 
+        JButton addClass = new JButton("add Class");
+        addClass.setBounds((int) (width * 0.85), (int) (0.02 * height), (int) (width * 0.075), (int) (0.05 * height));
+        this.add(addClass);
+        addClass.setVisible(true);
+
         JButton exit = new JButton("Exit");
         exit.setBounds((int) (width * 0.02), (int) (0.02 * height), (int) (width * 0.05), (int) (0.02 * height));
         this.add(exit);
         exit.setVisible(true);
 
-        JButton addStudent = new JButton("Add Student");
-        addStudent.setBounds((int) (width * 0.9), (int) (0.02 * height), (int) (width * 0.09), (int) (0.05 * height));
-        this.add(addStudent);
-        exit.setVisible(true);
+        JComboBox classesDisplay = new JComboBox<>(storedClasses);
+        classesDisplay.setBounds((int) (width * 0.1), (int) (0.02 * height), (int) (width * 0.7), (int) (0.05 * height));
+        this.add(classesDisplay);
 
-        JButton addClass = new JButton("Add Class");
-        addClass.setBounds((int) (width * 0.8), (int) (0.02 * height), (int) (width * 0.09), (int) (0.05 * height));
-        this.add(addClass);
-        exit.setVisible(true);
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,22 +65,13 @@ public class ClassManagement extends JFrame {
         addClass.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ClassName = JOptionPane.showInputDialog("Enter the Class");
-                classes.add(new TheClass(ClassName));
-                for(int i = 0; i < classes.size(); i ++){
-                    System.out.println(classes.get(i).ClassName);
+                String className = JOptionPane.showInputDialog("Enter the name of the school class:");
+                // Add the input to the vector
+                if (className != null && !className.isEmpty()) {
+                    addedClasses.add(className);
+                    // Update the JComboBox with the new items
+                    classesDisplay.setModel(new DefaultComboBoxModel<>(addedClasses));
                 }
-                try {
-                    files.StoreClasses(classes);
-                } catch (Exception ex) {
-                    ;
-                }
-            }
-        });
-        addStudent.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //System.out.println("a");
             }
         });
     }
