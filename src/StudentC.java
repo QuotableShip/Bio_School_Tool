@@ -1,7 +1,7 @@
-public class Student {
+public class StudentC {
     String StudentName;
     String StudentDoB;
-    public Student(String name, String DoB){
+    public StudentC(String name, String DoB){
         StudentName = name;
         StudentDoB = DoB;
     }
