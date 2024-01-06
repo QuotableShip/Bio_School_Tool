@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 public class Home extends JFrame{
     public Home(){
+
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
         double widthd = screen.getWidth() * 0.9;
