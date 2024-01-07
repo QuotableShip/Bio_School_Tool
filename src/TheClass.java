@@ -5,7 +5,7 @@ import java.util.Vector;
 public class TheClass {
     public String ClassName;
 
-    public Vector<Student> Students = new Vector<>();
+    public Vector<String> Students = new Vector<>();
 
     public TheClass(String name){
         ClassName = name;
