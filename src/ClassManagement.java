@@ -3,19 +3,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.Objects;
 import java.util.Vector;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ClassManagement extends JFrame {
-    private Map<String, Vector<Student>> classStudents = new HashMap<>();
+    private Map<String, String> classStudents = new HashMap<>();
     private JComboBox<String> classesDisplay;
+
+    Vector<String> addedClasses = new Vector<>();
+    Vector<String> Students = new Vector<>();
+
 
     public ClassManagement() {
 
 
-        //list of Classes
-        Vector<String> addedClasses = new Vector<>();
+
+        File classStudentsFile = new File("classStudents.dat");
+
+        try {
+            classStudentsFile.createNewFile();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
         //Stores addedClasses to File
         try (ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream("addedClasses.dat"))) {
@@ -33,7 +44,7 @@ public class ClassManagement extends JFrame {
         }
 
         try (ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream("classStudents.dat"))) {
-            classStudents = (Map<String, Vector<Student>>) fileReader.readObject();
+            classStudents = (HashMap<String, String>) fileReader.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,6 +76,11 @@ public class ClassManagement extends JFrame {
         this.add(exit);
         exit.setVisible(true);
 
+        JButton addStudent = new JButton();
+        addStudent.setBounds((int) (width * 0.02), (int) (0.85 * height), (int) (width * 0.1), (int) (0.05 * height));
+        this.add(addStudent);
+        addStudent.setVisible(true);
+
         JComboBox classesDisplay = new JComboBox<>(storedClasses);
         classesDisplay.setBounds((int) (width * 0.1), (int) (0.02 * height), (int) (width * 0.7), (int) (0.05 * height));
         this.add(classesDisplay);
@@ -72,12 +88,26 @@ public class ClassManagement extends JFrame {
         classesDisplay = new JComboBox(classStudents.keySet().toArray(new String[0]));
         classesDisplay.setBounds((int) (width * 0.1), (int) (0.02 * height), (int) (width * 0.7), (int) (0.05 * height));
         this.add(classesDisplay);
-        exit.addActionListener(new ActionListener() {
+
+        exit.addActionListener(e -> {
+            new Home();
+            setVisible(false);
+            dispose();
+        });
+
+        JComboBox finalClassesDisplay2 = classesDisplay;
+        addStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Home();
-                setVisible(false);
-                dispose();
+                String userInput = JOptionPane.showInputDialog("write the name of the student");
+                Students.add(userInput);
+                classStudents.put(userInput, Objects.requireNonNull(finalClassesDisplay2.getSelectedItem()).toString());
+                try (ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream("classStudents.dat"))) {
+                    fileWriter.writeObject(userInput);
+                } catch (IOException k) {
+                    k.printStackTrace();
+                }
+
             }
         });
 
@@ -91,8 +121,9 @@ public class ClassManagement extends JFrame {
                 if (className != null && !className.isEmpty()) {
                     addedClasses.add(className);
                     // Update the JComboBox with the new items
-                    finalClassesDisplay1.setModel(new DefaultComboBoxModel<>(finalStoredClasses));
+
                 }
+                finalClassesDisplay1.setModel(new DefaultComboBoxModel<>(finalStoredClasses));
             }
         });
 
@@ -108,78 +139,35 @@ public class ClassManagement extends JFrame {
     }
 
     private void displayStudentsInTable(String className) {
-        Vector<Student> students = classStudents.get(className);
-        if (students != null) {
-            String[] columnNames = {"Name", "Age", "DOB", "Surname"};
-            Object[][] data = new Object[students.size()][4];
-            for (int i = 0; i < students.size(); i++) {
-                Student student = students.get(i);
-                data[i][0] = student.getName();
-                data[i][1] = student.getAge();
-                data[i][2] = student.getDateOfBirth();
-                data[i][3] = student.getSurname();
-            }
-            JTable table = new JTable(data, columnNames);
-            JScrollPane scrollPane = new JScrollPane(table);
-            JFrame frame = new JFrame("Student Information");
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
-            panel.add(scrollPane, BorderLayout.CENTER);
-            frame.add(panel);
-            frame.setSize(600, 400);
-            frame.setVisible(true);
-            // Display the table in your GUI as per your layout
 
+        Object[][] data;
+        data = new Object[1][Students.size()];
+        String[] columnNames = {"Students"};
+        int counter = -1;
+        for (String student : Students) {
+            counter += 1;
+            data[0][counter] = student;
         }
+        JTable table = new JTable(data, columnNames);
+        JScrollPane scrollPane = new JScrollPane(table);
+        JFrame frame = new JFrame("Student Information");
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(scrollPane, BorderLayout.CENTER);
+        frame.add(panel);
+        frame.setSize(600, 400);
+        frame.setVisible(true);
+        // Display the table in your GUI as per your layout
 
     }
-    public static void main (String[] args){
+
+}
+class Main
+{
+    public static void main(String[] args)
+    {
         new ClassManagement();
     }
 }
-class Student implements Serializable {
-    private String name;
-    private int age;
-    private String dateOfBirth;
-    private String surname;
 
-    public Student(String name, int age, String dateOfBirth, String surname) {
-        this.name = name;
-        this.age = age;
-        this.dateOfBirth = dateOfBirth;
-        this.surname = surname;
-    }
 
-    // Getters and Setters for the attributes
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-}
