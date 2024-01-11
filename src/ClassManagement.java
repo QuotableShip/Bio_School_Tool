@@ -10,7 +10,9 @@ import java.util.Map;
 
 public class ClassManagement extends JFrame {
     private Map<String, String> classStudents = new HashMap<>();
-    private JComboBox<String> classesDisplay;
+    public static JComboBox<String> classesDisplay;
+
+    public Vector<String> storedClasses;
 
     Vector<String> addedClasses = new Vector<>();
     Vector<String> Students = new Vector<>();
@@ -36,7 +38,7 @@ public class ClassManagement extends JFrame {
         }
 
         //reads from addedClasses File
-        Vector<String> storedClasses = new Vector<>();
+        storedClasses = new Vector<>();
         try (ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream("addedClasses.dat"))) {
             storedClasses = (Vector<String>) fileReader.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -46,6 +48,7 @@ public class ClassManagement extends JFrame {
         try (ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream("classStudents.dat"))) {
             classStudents = (HashMap<String, String>) fileReader.readObject();
         } catch (IOException | ClassNotFoundException e) {
+            classStudents = new HashMap<String, String>();
             e.printStackTrace();
         }
 
@@ -65,6 +68,10 @@ public class ClassManagement extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         this.setLayout(null);
+
+        JPanel comboBoxPanel = new JPanel();
+        comboBoxPanel.setBounds((int) (width * 0), (int) (0), (int) (width * 1), (int) (0.2 * height));
+        this.add(comboBoxPanel);
 
         JButton addClass = new JButton("add Class");
         addClass.setBounds((int) (width * 0.85), (int) (0.02 * height), (int) (width * 0.075), (int) (0.05 * height));
@@ -95,13 +102,15 @@ public class ClassManagement extends JFrame {
             dispose();
         });
 
+        comboBoxPanel.add(classesDisplay);
+
         JComboBox finalClassesDisplay2 = classesDisplay;
         addStudent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userInput = JOptionPane.showInputDialog("write the name of the student");
                 Students.add(userInput);
-                classStudents.put(userInput, Objects.requireNonNull(finalClassesDisplay2.getSelectedItem()).toString());
+                classStudents.put(userInput, Objects.requireNonNull(ClassManagement.classesDisplay.getSelectedItem()).toString());
                 try (ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream("classStudents.dat"))) {
                     fileWriter.writeObject(userInput);
                 } catch (IOException k) {
@@ -111,7 +120,6 @@ public class ClassManagement extends JFrame {
             }
         });
 
-        JComboBox finalClassesDisplay1 = classesDisplay;
         Vector<String> finalStoredClasses = storedClasses;
         addClass.addActionListener(new ActionListener() {
             @Override
@@ -123,7 +131,7 @@ public class ClassManagement extends JFrame {
                     // Update the JComboBox with the new items
 
                 }
-                finalClassesDisplay1.setModel(new DefaultComboBoxModel<>(finalStoredClasses));
+                updateClassComboBox();
             }
         });
 
@@ -157,12 +165,21 @@ public class ClassManagement extends JFrame {
         frame.add(panel);
         frame.setSize(600, 400);
         frame.setVisible(true);
-        // Display the table in your GUI as per your layout
 
     }
 
+    public void updateClassComboBox()
+    {
+        classesDisplay.removeAllItems();
+
+        for (String i : storedClasses)
+        {
+            classesDisplay.addItem(i);
+        }
+    }
+
 }
-class Main
+class ClassMangementMain
 {
     public static void main(String[] args)
     {
