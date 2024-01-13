@@ -11,24 +11,25 @@ import java.io.*;
 import java.util.*;
 
 public class ClassManagementNoFileHandling extends JFrame {
-    private Map<String, ArrayList> classStudents = new HashMap<>();
+    private Map<String, ArrayList<String>> classStudents = new HashMap<>();
     public static JComboBox<String> classesDisplay;
 
     JTable studentsTable;
-    JScrollPane studentsTableScroll;
     public ArrayList<String> storedClasses;
 
     ArrayList<String> addedClasses = new ArrayList<>();
     ArrayList<String> Students = new ArrayList<>();
 
 
-    public ClassManagementNoFileHandling() {Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
+    public ClassManagementNoFileHandling() {Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        Students.add("123");
+        Students.add("124");
+        Students.add("125");
         int width = (int) (screen.getWidth() * 0.9);
         int height = (int) (screen.getHeight() * 0.9);
 
         this.setLayout(new BorderLayout());
-
 
 
         JPanel ClassManagementPanel = new JPanel();
@@ -78,14 +79,7 @@ public class ClassManagementNoFileHandling extends JFrame {
 
         //comboBoxPanel.add(classesDisplay);
 
-        addStudent.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String userInput = JOptionPane.showInputDialog("write the name of the student");
-                Students.add(userInput);
-                classStudents.put(Objects.requireNonNull(classesDisplay.getSelectedItem()).toString(), userInput);
-            }
-        });
+
 
 
         addClass.addActionListener(new ActionListener() {
@@ -107,9 +101,37 @@ public class ClassManagementNoFileHandling extends JFrame {
                 //updateClassComboBox();
             }
         });
+        JPanel centrePanel = new JPanel();
+        centrePanel.add(new JLabel("infinwginin"));
+        JScrollPane studentsTableScroll = new JScrollPane();
+        this.add(studentsTableScroll, BorderLayout.CENTER);
+        studentsTableScroll.setViewportView(centrePanel);
+        for (String student : Students) {
+            JPanel newPanel = new JPanel();
+            JLabel studentLbl = new JLabel();
+            studentLbl.setText(student);
+            newPanel.add(studentLbl);
+            centrePanel.add(newPanel);
+        }
+
+        addStudent.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String userInput = JOptionPane.showInputDialog("write the name of the student");
+                Students.add(userInput);
+                classStudents.get(classesDisplay.getSelectedItem().toString()).add(userInput);
+                JPanel newPanel = new JPanel();
+                JLabel studentLbl = new JLabel();
+                studentLbl.setText(userInput);
+                newPanel.add(studentLbl);
+                centrePanel.add(newPanel);
+                studentsTableScroll.repaint();
+            }
+        });
 
 
     }
+
     private void displayStudentsInTable(String className) {
 
 
@@ -123,14 +145,15 @@ public class ClassManagementNoFileHandling extends JFrame {
         }
         System.out.println(studentsData);
         JPanel studentTablePanel = new JPanel();
-        studentsTableScroll = new JScrollPane(studentsTable);
+        //studentsTableScroll = new JScrollPane(studentsTable);
         studentsTable = new JTable(studentsData, columnStudents);
         DefaultTableModel studentsTableModel = new DefaultTableModel();
         studentsTableModel.addColumn(Students);
         studentTablePanel.setLayout(new BorderLayout());
-        studentTablePanel.add(studentsTableScroll, BorderLayout.CENTER);
-        this.add(studentTablePanel, BorderLayout.CENTER);
+        //studentTablePanel.add(studentsTableScroll, BorderLayout.CENTER);
+        //this.add(studentTablePanel, BorderLayout.CENTER);
     }
+
 
 
     public void updateClassComboBox()
@@ -140,8 +163,8 @@ public class ClassManagementNoFileHandling extends JFrame {
             classesDisplay.addItem(i);
         }
     }
-
 }
+
 class ClassManagementNoFileHandlingMain
 {
     public static void main(String[] args)
