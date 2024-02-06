@@ -1,11 +1,10 @@
-import javax.swing.*;
+/*import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class Attendance extends JFrame {
-    public Vector<TheClass> classes = new Vector<TheClass>();
 
     public JComboBox<String> classesDropDown;
     public Attendance(){
@@ -53,7 +52,7 @@ public class Attendance extends JFrame {
                     classesDropDown.addItem(classes.get(i).ClassName);
                 }
                 classesDropDown.setModel(new DefaultComboBoxModel(classes));
-                //classesDropDown.setModel(new DefaultComboBoxModel(ClassManagement.classes));
+
                 }
         });
     }
@@ -61,3 +60,6 @@ public class Attendance extends JFrame {
         new Attendance();
     }
 }
+
+ */
+

@@ -58,7 +58,7 @@ public class Home extends JFrame{
         attendance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Attendance();
+                //new Attendance();
                 setVisible(false);
                 dispose();
 
@@ -86,7 +86,7 @@ public class Home extends JFrame{
         CM.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ClassManagement();
+                new ThirdTry();
                 setVisible(false);
                 dispose();
             }

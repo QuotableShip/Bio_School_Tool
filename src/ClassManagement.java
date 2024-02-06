@@ -1,3 +1,4 @@
+/*
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +9,7 @@ import java.util.Vector;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClassManagement extends JFrame {
+//public class ClassManagement extends JFrame {
     private Map<String, String> classStudents = new HashMap<>();
     public static JComboBox<String> classesDisplay;
 
@@ -188,3 +189,5 @@ class ClassMangementMain
 }
 
 
+
+ */
