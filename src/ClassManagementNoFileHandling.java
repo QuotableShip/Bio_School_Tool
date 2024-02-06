@@ -18,6 +18,8 @@ public class ClassManagementNoFileHandling extends JFrame {
     JScrollPane studentsTableScroll;
     public ArrayList<String> storedClasses;
 
+    String[][] twoDStudents;
+
     ArrayList<String> addedClasses = new ArrayList<>();
     ArrayList<String> Students = new ArrayList<>();
 
