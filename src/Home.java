@@ -86,7 +86,7 @@ public class Home extends JFrame{
         CM.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ClassManagement();
+                new ThirdTry();
                 setVisible(false);
                 dispose();
             }
